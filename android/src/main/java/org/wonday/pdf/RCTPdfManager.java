@@ -105,6 +105,11 @@ public class RCTPdfManager extends SimpleViewManager<PdfView> {
         pdfView.setFitPolicy(fitPolicy);
     }
 
+    @ReactProp(name = "displayPages")
+    public void setDisplayPages(PdfView pdfView, int displayPages) {
+        pdfView.setPages(displayPages);
+    }
+
     @Override
     public void onAfterUpdateTransaction(PdfView pdfView) {
         super.onAfterUpdateTransaction(pdfView);

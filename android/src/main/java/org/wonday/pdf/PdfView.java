@@ -62,6 +62,7 @@ public class PdfView extends PDFView implements OnPageChangeListener,OnLoadCompl
     private boolean autoSpacing = false;
     private boolean pageFling = false;
     private boolean pageSnap = false;
+    private int pages = -1;
     private FitPolicy fitPolicy = FitPolicy.WIDTH;
 
     private static PdfView instance = null;
@@ -171,23 +172,42 @@ public class PdfView extends PDFView implements OnPageChangeListener,OnLoadCompl
         showLog(format("drawPdf path:%s %s", this.path, this.page));
 
         if (this.path != null){
-            this.fromUri(getURI(this.path))
-                .defaultPage(this.page-1)
-                .swipeHorizontal(this.horizontal)
-                .onPageChange(this)
-                .onLoad(this)
-                .onError(this)
-                .onTap(this)
-                .onDraw(this)
-                .spacing(this.spacing)
-                .password(this.password)
-                .enableAntialiasing(this.enableAntialiasing)
-                .pageFitPolicy(this.fitPolicy)
-                .pageSnap(this.pageSnap)
-                .autoSpacing(this.autoSpacing)
-                .pageFling(this.pageFling)
-                .load();
-
+            if(this.pages < 0){
+                this.fromUri(getURI(this.path))
+                    .defaultPage(this.page-1)
+                    .swipeHorizontal(this.horizontal)
+                    .onPageChange(this)
+                    .onLoad(this)
+                    .onError(this)
+                    .onTap(this)
+                    .onDraw(this)
+                    .spacing(this.spacing)
+                    .password(this.password)
+                    .enableAntialiasing(this.enableAntialiasing)
+                    .pageFitPolicy(this.fitPolicy)
+                    .pageSnap(this.pageSnap)
+                    .autoSpacing(this.autoSpacing)
+                    .pageFling(this.pageFling)
+                    .load();
+            }else{
+                this.fromUri(getURI(this.path))
+                    .defaultPage(this.page-1)
+                    .pages(this.pages)
+                    .swipeHorizontal(this.horizontal)
+                    .onPageChange(this)
+                    .onLoad(this)
+                    .onError(this)
+                    .onTap(this)
+                    .onDraw(this)
+                    .spacing(this.spacing)
+                    .password(this.password)
+                    .enableAntialiasing(this.enableAntialiasing)
+                    .pageFitPolicy(this.fitPolicy)
+                    .pageSnap(this.pageSnap)
+                    .autoSpacing(this.autoSpacing)
+                    .pageFling(this.pageFling)
+                    .load();
+            }
         }
     }
 
@@ -198,6 +218,10 @@ public class PdfView extends PDFView implements OnPageChangeListener,OnLoadCompl
     // page start from 1
     public void setPage(int page) {
         this.page = page>1?page:1;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
     }
 
     public void setScale(float scale) {

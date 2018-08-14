@@ -64,6 +64,7 @@ export default class Pdf extends Component {
         onLayout: PropTypes.bool,
         accessibilityLiveRegion: PropTypes.string,
         accessibilityComponentType: PropTypes.string,
+        displayPages: PropTypes.number
     };
 
     static defaultProps = {
@@ -88,6 +89,7 @@ export default class Pdf extends Component {
         },
         onScaleChanged: (scale) => {
         },
+        displayPages: null,
     };
 
     constructor(props) {
