@@ -69,6 +69,8 @@ public class PdfView extends PDFView implements OnPageChangeListener,OnLoadCompl
 
     private float lastPageWidth = 0;
     private float lastPageHeight = 0;
+    private float originPageWidth = 0;
+    private float originPageHeight = 0;
 
 
     public PdfView(ThemedReactContext context, AttributeSet set){
@@ -99,6 +101,9 @@ public class PdfView extends PDFView implements OnPageChangeListener,OnLoadCompl
 
         float width = this.getWidth();
         float height = this.getHeight();
+
+        originPageWidth = width;
+        originPageHeight = height;
 
         this.zoomTo(this.scale);
 
@@ -152,7 +157,7 @@ public class PdfView extends PDFView implements OnPageChangeListener,OnLoadCompl
 
         if (lastPageWidth>0 && lastPageHeight>0 && (pageWidth!=lastPageWidth || pageHeight!=lastPageHeight)) {
             WritableMap event = Arguments.createMap();
-            event.putString("message", "scaleChanged|"+(pageWidth/lastPageWidth));
+            event.putString("message", "scaleChanged|"+(pageWidth/originPageWidth));
 
             ReactContext reactContext = (ReactContext)this.getContext();
             reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
